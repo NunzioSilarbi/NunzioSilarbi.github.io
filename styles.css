@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Photograph+Signature&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #282c34;
+    background-image: url('Wallpaper.gif');
+    background-size: cover;
+    background-repeat: repeat-y;
+    position: relative;
+    font-family: 'Courgette', cursive;
+    color: white;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(3px) brightness(150%);
+}
+
+h1 {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Photograph Signature', cursive;
+    font-size: 3.5em;
+    color: white;
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+.box1,
+.box2 {
+    width: 40%;
+    max-width: 40%;
+    height: 280px;
+    border: 2px solid white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+.container:hover .box1 {
+    transform: translateX(-15px);
+}
+
+.container:hover .box2 {
+    transform: translateX(15px);
+}
+
+.box1 h2:first-child,
+.box2 h2:first-child {
+    margin-top: 20px;
+    position: absolute;
+    top: 10px;
+    font-size: 2em;
+}
+
+.box1 h2:last-child,
+.box2 h2:last-child {
+    text-align: center;
+}
+
+.box1:hover h2:last-child,
+.box2:hover h2:last-child {
+    color: black;
+}
+
+h2 {
+    font-family: 'Courgette', cursive;
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #282c34;
+}
+
+.footer-box {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.footer-box img {
+    width: 25px;
+    height: auto;
+    margin-right: 8px;
+}
+
+.footer-box p {
+    font-family: 'Courgette', cursive;
+    color: white;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.footer-box .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+}
+
+.footer-box .github-link {
+    text-decoration: underline;
+    color: white;
+}
+
+.footer-box a {
+    display: flex;
+    align-items: center;
+}
+
+.footer-box a img {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+}
+
+.footer-box a .contact {
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.footer-box a .github-link {
+    text-decoration: underline;
+    color: white;
+}
+
+.footer-box a .github-link:hover {
+    color: lightblue;
+}
