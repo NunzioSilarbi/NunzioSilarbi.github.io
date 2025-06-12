@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+
+        .titre-principal {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .titre-secondaire {
+            font-size: 1.75rem;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .centered-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .centered-image img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .image-title {
+            color: #aaa;
+            font-style: italic;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .centered-text {
+            text-align: justify;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .side-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .side-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .side-image, .side-text {
+            width: 48%;
+            text-align: justify;
+        }
+
+        .side-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .side-image .image-title {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .side-section, .side-section.reverse {
+                flex-direction: column;
+            }
+
+            .side-image, .side-text {
+                width: 100%;
+                text-align: justify;
+            }
+
+            .side-text {
+                width: 48%;
+                text-align: justify;
+                font-size: 1.2rem;
+            }
+        }
+
+        footer {
+            background-color: #eee;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .footer-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .footer-item a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        .footer-item a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ddd;
+        }
+
+        .inner-box {
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .inner-box.reverse {
+            flex-direction: row-reverse;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="main-container">
+    <h1 class="titre-principal">Projet universitaire :</h1>
+    <h1 class="titre-principal">Prédiction de la qualité des cours d'eau</h1>
+    <div class="section centered-image">
+        <p></p>
+        <div class="centered-text">Dans le cadre de notre projet de SAÉ en troisième année, nous avons été amenés à développer une application complète en groupe de cinq étudiants, en suivant une architecture globale partiellement imposée par les encadrants. Ce projet mobilise de nombreuses compétences acquises tout au long de la formation, aussi bien en développement logiciel, en gestion de données qu’en conduite de projet.</div>
+        <div class="centered-text">L’objectif général était de concevoir un système capable de récupérer, traiter et visualiser des données issues de capteurs physiques (Arduino) et de médias capturés par un appareil mobile, en s’appuyant sur une base de données et une intelligence artificielle capable de fournir des prédictions. L’ensemble du projet devait être orchestré autour d’un schéma technique définissant les grandes composantes à respecter, tout en laissant une certaine liberté dans leur implémentation concrète.</div>
+        <div class="centered-text">Après plusieurs séances de brainstorming en équipe, nous avons convergé vers une problématique qui nous semblait à la fois pertinente et réalisable : l’analyse de la qualité de l’eau sur différents sites de baignade en France. Cette thématique, validée par notre référent, nous a permis de tirer parti des capteurs disponibles et de mettre en œuvre des algorithmes de traitement et d’analyse adaptés à des données environnementales.</div>
+        <div class="centered-text">La Trace I ci-dessous présente l’architecture technique de notre application. Elle illustre les différentes composantes logicielles du projet, séparées en deux catégories : les modules contraints (entourés en rouge), dont les spécifications étaient fixées par les enseignants, et les modules laissés à notre libre appréciation (entourés en bleu), pour lesquels nous avons fait des choix techniques adaptés à nos besoins.</div>
+
+        <p> </p>
+        <img src="icons/Structure.webp" alt="Image 1" />
+        <div class="image-title">Trace I : Structure générale du projet</div>
+    </div>
+
+    <div class="section side-section">
+        <div class="inner-box">
+            <h2 class="titre-secondaire">Serveur TCP</h2>
+            <div class="centered-text">Le premier module de notre architecture, et sans doute le plus fondamental, est un serveur central écrit en Java. Il joue un rôle de plaque tournante : toutes les données transitent par lui, qu’elles proviennent des capteurs physiques, de l’application mobile ou qu’elles soient destinées à la base de données. Ce serveur communique via le protocole TCP, et son implémentation s’est appuyée sur un squelette de code fourni par l’équipe enseignante. Si sa structure globale devait être conservée, nous avons néanmoins dû l’adapter en profondeur à notre problématique spécifique.</div>
+            <div class="centered-text">La lecture de ce code initial a mobilisé nos compétences acquises en programmation orientée objet et en communication client/serveur, notamment abordées dans le cadre des cours de programation avancé. Cela nous a permis d’identifier les sections à compléter ou modifier : ajout de nouvelles commandes, gestion des connexions multiples, ou encore enrichissement du protocole d’échange avec des données spécifiques à nos capteurs.</div>
+            <div class="centered-text">L’interfaçage entre le serveur Java et la base de données MongoDB a constitué un point clé du développement. Nous avons choisi d’implémenter l’insertion directe des données dans MongoDB via une bibliothèque Java adaptée, ce qui nous a demandé d’approfondir nos connaissances en gestion des données non relationnelles. Ce travail a renforcé notre capacité à intégrer efficacement une base de données moderne dans une architecture distribuée, tout en respectant les contraintes de performance et de fiabilité. La maîtrise des requêtes et des formats JSON a également été essentielle pour assurer une communication fluide entre le serveur et la base.</div>
+            <div class="centered-text">Enfin, grâce à la mise en place d’un client de test, nous avons pu valider le bon fonctionnement de l’ensemble du système en simulant l’envoi de données depuis les différentes parties. Cette phase de validation a consolidé notre maîtrise des outils de débogage, de l’analyse réseau, et du fonctionnement d’une architecture distribuée.</div>
+        </div>
+    </div>
+
+    <div class="section side-section">
+        <div class="inner-box">
+            <h2 class="titre-secondaire">API Node</h2>
+            <div class="centered-text">L’API web, développée en Node.js, faisait office d’intermédiaire entre le serveur central et la base de données MongoDB. Son implémentation s’est appuyée sur une base existante, qu’il a fallu adapter en profondeur pour répondre aux besoins spécifiques du projet. J’ai conçu mes propres modèles de données, structurés à l’aide de Mongoose.</div>
+            <div class="centered-text">La création des schémas, la gestion des requêtes asynchrones et l'intégration des données au format attendu ont nécessité une exploration autonome de la documentation et de ressources en ligne. Cette phase m’a permis de gagner en efficacité sur des aspects techniques que je n’avais que partiellement abordés auparavant, tout en assurant une interopérabilité fluide entre les différents modules de l’architecture.</div>
+        </div>
+    </div>
+
+    <div class="section side-section">
+        <div class="inner-box">
+
+            <div class="side-text">
+                <h2 class="titre-secondaire">Applications android et serveur d'analyse média</h2>
+                <p>L’application mobile, développée sous Android, avait pour objectif de permettre la sélection ou l’enregistrement d’une vidéo, puis sa transmission au serveur dédié à l’analyse. Son interface se compose de deux champs texte destinés à l’identification, de deux boutons – l’un pour accéder à la galerie, l’autre pour activer la caméra – ainsi que d’un lecteur vidéo intégré permettant de visualiser l’élément sélectionné (voir Trace II à droite).</p>
+                <p>La réalisation de cette interface a mobilisé plusieurs savoir-faire liés au développement mobile natif. J’ai utilisé des composants standards d’Android (EditText, Button, VideoView) et mis en place la gestion des permissions pour l’accès à la caméra et au stockage. Il a également fallu organiser clairement les étapes de capture ou de sélection d’une vidéo, son affichage immédiat, et son envoi, en respectant le cycle de vie des activités Android.</p>
+                <p>La mise en œuvre de la communication entre l’application et le serveur a nécessité un travail approfondi, notamment pour assurer le transfert de fichiers via le protocole TCP. J’ai adapté le traitement des flux binaires côté Android afin de garantir un envoi stable et cohérent avec les attentes du serveur distant. Ce processus a impliqué une gestion précise des permissions, des formats d’encodage et des connexions réseau.</p>
+                <p>L’application transmet uniquement la vidéo ; l’analyse, réalisée côté serveur, repose sur l’observation d’un témoin visuel – un canard en plastique – dont la taille connue permet d’estimer la vitesse du courant. L’efficacité de ce dispositif dépend directement de la qualité de la capture et de l’intégrité du média transmis, ce qui confère à cette application un rôle essentiel dans la chaîne technique.</p>
+            </div>
+            <div class="side-image">
+                <img src="icons/android.jpg" alt="Android" />
+                <div class="image-title">Trace II : Applications android</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section side-section">
+        <div class="inner-box">
+            <h2 class="titre-secondaire">Front end et dockerisation</h2>
+            <div class="centered-text">La partie front-end, développée avec Vue.js, s’est révélée plus directe à mettre en œuvre. Les savoir-faire acquis lors de l’année précédente, notamment dans le cadre de la SAÉ dédiée à ce framework, ont facilité la structuration des composants, la gestion des routes, et l’interaction avec l’API. J’ai ainsi pu me concentrer sur l’organisation claire de l’interface et la cohérence de l’expérience utilisateur.</div>
+            <div class="centered-text">Par ailleurs, j’ai mis en place des scripts Docker permettant de conteneuriser l’ensemble des modules serveurs. Cette démarche a simplifié le déploiement et les tests, en offrant un environnement unifié et reproductible pour toutes les parties du projet.</div>
+        </div>
+    </div>
+
+    <div class="section side-section">
+        <div class="inner-box">
+            <h2 class="titre-secondaire">Conclusion</h2>
+            <div class="centered-text">Ce projet m’a permis de mobiliser de manière concrète et transversale l’ensemble des connaissances acquises au cours de la troisième année. J’ai pu intervenir sur des aspects techniques variés – programmation embarquée, développement mobile, traitement de médias, échanges client-serveur ou encore interface web – tout en participant activement aux différentes phases d’un projet collectif : définition des besoins, exploration de solutions, mise en œuvre technique et validation. Cette expérience a renforcé ma capacité à m’adapter à des contraintes multiples et à contribuer efficacement au sein d’une équipe projet.</div>
+        </div>
+    </div>
+</div>
+</body>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-item">
+            <img src="icons/phone.png" alt="Téléphone" class="footer-icon" />
+            <span>+33 7 62 77 97 47</span>
+        </div>
+        <div class="footer-item">
+            <img src="icons/mail.png" alt="Email" class="footer-icon" />
+            <span>silarbinunzio@gmail.com</span>
+        </div>
+        <div class="footer-item">
+            <img src="icons/github.png" alt="GitHub" class="footer-icon" />
+            <a href="https://github.com/NunzioSilarbi" target="_blank">NunzioSilarbi</a>
+        </div>
+    </div>
+</footer>
+
+</html>
