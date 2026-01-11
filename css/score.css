@@ -1,0 +1,171 @@
+/* === BACKGROUND === */
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+
+    background-color: #638E9F;
+    background-image: url('../static/fc_logo.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* === CONTAINER === */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* === CARD === */
+.card {
+    width: 70%;
+    max-width: 800px;
+    height: 600px;
+    padding: 30px;
+
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* === TABLE ZONE === */
+.players-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+/* === TABLE === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* HEADER */
+.table-header th {
+    background-color: #638E9F;
+    color: white;
+    padding: 10px;
+}
+
+/* CELLS */
+th, td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* === BUTTON === */
+#next-round {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    background: #638E9F;
+    color: white;
+}
+
+#next-round:hover {
+    opacity: 0.9;
+}
+
+/* === PLACEMENTS === */
+.placement {
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* 1er */
+.gold {
+    background: linear-gradient(135deg, #FFD700, #FFECB3);
+    color: #000;
+}
+
+/* 2e */
+.silver {
+    background: linear-gradient(135deg, #C0C0C0, #E0E0E0);
+    color: #000;
+}
+
+/* 3e */
+.bronze {
+    background: linear-gradient(135deg, #CD7F32, #E6B07A);
+    color: #000;
+}
+
+/* 4+ */
+.blue {
+    background: #B3D9E8;
+    color: #000;
+}
+
+/* === QUITTER (haut gauche) === */
+.top-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+
+    background: #ff4d4d;
+    color: white;
+}
+
+.top-left:hover {
+    background: #e60000;
+}
+
+/* === INFO ROUNDS === */
+.round-info {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.round-info span {
+    color: #638E9F;
+    font-size: 18px;
+}
+
+/* === BOUTON TERMINER LE TOURNOI === */
+#finish-tournament {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    background: #638E9F;
+    color: white;
+    margin-top: 10px; /* espace entre quitter et terminer */
+}
+
+#finish-tournament:hover {
+    opacity: 0.9;
+}
+

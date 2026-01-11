@@ -1,0 +1,124 @@
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #638E9F;
+    background-image: url('../static/fc_logo.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden; /* empêche le scroll de la page */
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 70%;
+    max-width: 800px;
+    height: 600px; /* carte fixe */
+    padding: 30px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+}
+
+.card h1 {
+    margin-bottom: 20px;
+    color: #111;
+    text-align: center;
+}
+
+/* Tableau sans scroll, prend tout l’espace restant */
+.players-scroll {
+    height: calc(100% - 70px); /* 70px = approx titre + marges */
+    overflow-y: auto; /* empêche scroll interne */
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+}
+
+/* Numéro joueur */
+.player-number {
+    width: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.remove-player {
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: #ff4d4d;
+    color: white;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.remove-player:hover {
+    background: #e60000;
+}
+
+.add-row {
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #444;
+    background: rgba(0, 0, 0, 0.05);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.add-row:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.add-row:active {
+    transform: scale(0.98);
+}
+
+#start-tournament {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background: #4caf50;
+    color: white;
+    transition: background 0.2s;
+}
+
+#start-tournament:hover {
+    background: #45a049;
+}

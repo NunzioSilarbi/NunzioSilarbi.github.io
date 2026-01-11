@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Yu-Gi-Oh Tournament Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <h1>Joueurs</h1>
+
+        <!-- Zone scrollable des joueurs -->
+        <div class="players-scroll">
+            <table>
+                <tbody id="players-body">
+                <tr>
+                    <td>
+                        <span class="player-number">1</span>
+                        <input type="text" placeholder="Nom du joueur">
+                        <button class="remove-player">❌</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-row" id="add-player">
+            ➕ Ajouter un joueur
+        </div>
+
+        <button id="start-tournament">Valider les joueurs</button>
+
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

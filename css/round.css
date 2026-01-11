@@ -1,0 +1,132 @@
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+
+    background-color: #638E9F;
+    background-image: url('../static/fc_logo.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 70%;
+    max-width: 800px;
+    height: 600px; /* carte fixe */
+    padding: 30px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+}
+
+.card h1 {
+    margin-bottom: 20px;
+    color: #111;
+    text-align: center;
+}
+
+/* Tableau sans scroll, prend tout l’espace restant */
+.players-scroll {
+    height: calc(100% - 70px); /* ajuste à la carte */
+    overflow-y: auto;           /* empêche scroll interne */
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr.match-row {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+td {
+    padding: 0 10px;
+}
+
+.match-number {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.player-name {
+    flex: 1;
+    text-align: center;
+}
+
+.select-btn {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.select-btn.selected {
+    background: #638E9F;
+    color: white;
+}
+
+#validate-round {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: not-allowed;
+    border-radius: 8px;
+    border: none;
+    background: #ccc;
+    color: #fff;
+    transition: background 0.2s;
+}
+
+#validate-round.enabled {
+    background: #4caf50;
+    cursor: pointer;
+}
+
+/* Bouton transparent pour le timer (version plus grande) */
+.timer-btn {
+    width: 100%;
+    padding: 35px 0;           /* plus grand padding */
+    font-size: 108px;           /* texte plus grand */
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid rgba(0,0,0,0.25); /* bordure un peu plus épaisse */
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.timer-btn:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.timer-btn:active {
+    transform: scale(0.98);
+}

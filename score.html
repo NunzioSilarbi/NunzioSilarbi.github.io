@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Scores – Tournoi Yu-Gi-Oh</title>
+    <link rel="stylesheet" href="css/score.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <button id="quit-button" class="top-left">✖ Quitter</button>
+
+        <h1>Scores</h1>
+
+        <div id="round-info" class="round-info">
+            Rounds restants : <span id="round-count"></span>
+        </div>
+
+        <div class="players-scroll">
+            <table>
+                <thead>
+                <tr class="table-header">
+                    <th>Placement</th>
+                    <th>Nom</th>
+                    <th>Victoire</th>
+                    <th>Défaite</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody id="score-body">
+                </tbody>
+            </table>
+        </div>
+
+        <button id="next-round">Continuer</button>
+
+    </div>
+</div>
+
+<script src="js/score.js"></script>
+
+</body>
+</html>
