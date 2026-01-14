@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const addPlayerBtn = document.getElementById("add-player");
     const startTournamentBtn = document.getElementById("start-tournament");
 
-    // Met à jour les numéros
     function updatePlayerNumbers() {
         const rows = playersBody.querySelectorAll("tr");
         rows.forEach((row, index) => {
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Crée une ligne joueur
     function createPlayerRow(name = "") {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
@@ -45,12 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         input.focus();
     }
 
-    // Ajouter une ligne via ➕
     addPlayerBtn.addEventListener("click", () => {
         createPlayerRow();
     });
 
-    // Initialise la première ligne
     function initializeFirstRow() {
         const firstRow = playersBody.querySelector("tr");
         if (!firstRow) return;
@@ -85,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializeFirstRow();
 
-// Récupère tous les joueurs
     function getAllPlayers() {
         const rows = playersBody.querySelectorAll("tr");
         const players = [];
@@ -96,17 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (input && input.value.trim() !== "") {
                 players.push({
                     name: input.value.trim(),
-
-                    // Statistiques
                     victory: 0,
                     defeat: 0,
-                    winrate: null,          // % victoire (null tant qu'aucun match)
-
+                    winrate: null,
                     score: 0,
-
-                    // Historique
-                    opponents: [],          // déjà existant
-                    adversaries: []         // nouveau tableau
+                    opponents: [],
+                    adversaries: []
                 });
             }
         });
@@ -114,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return players;
     }
 
-    // Bouton démarrer tournoi
     startTournamentBtn.addEventListener("click", () => {
         const players = getAllPlayers();
 
@@ -123,10 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Sauvegarde dans localStorage
         localStorage.setItem("tournamentPlayers", JSON.stringify(players));
 
-        // Redirection vers la page tournoi
         window.location.href = "./tournament.html";
     });
 

@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =======================
-       TIMER 50 MINUTES
-    ======================= */
     const timerBtn = document.getElementById("round-timer");
     let timerInterval = null;
     let timeLeft = 50 * 60; // 50 minutes
@@ -29,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     });
 
-    /* =======================
-       RÉCUPÉRATION DES JOUEURS
-    ======================= */
     let players = JSON.parse(localStorage.getItem("tournamentPlayers")) || [];
 
     if (!players.length) {
@@ -40,11 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    /* =======================
-       TRI SWISS
-    ======================= */
-    players.sort((a, b) => b.score - a.score);
-
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -52,62 +41,68 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const scoreGroups = {};
     players.forEach(p => {
-        if (!scoreGroups[p.score]) scoreGroups[p.score] = [];
-        scoreGroups[p.score].push(p);
+        p.opponents ??= [];
+        p.adversaries ??= [];
+        p.victory ??= 0;
+        p.defeat ??= 0;
+        p.score ??= "000000000";
     });
 
-    Object.values(scoreGroups).forEach(shuffle);
+    shuffle(players);
 
-    let remainingPlayers = [];
-    Object.keys(scoreGroups)
-        .sort((a, b) => b - a)
-        .forEach(score => remainingPlayers.push(...scoreGroups[score]));
+    const groups = {};
+    players.forEach(p => {
+        const key = Math.floor(Number(p.score) / 1_000_000);
+        groups[key] ??= [];
+        groups[key].push(p);
+    });
 
-    /* =======================
-       APPARIEMENTS
-    ======================= */
+    Object.values(groups).forEach(shuffle);
+
+    const orderedGroups = Object.keys(groups)
+        .map(Number)
+        .sort((a, b) => b - a);
+
     const pairings = [];
+    let carryPlayer = null;
 
-    while (remainingPlayers.length > 1) {
-        const p1 = remainingPlayers.shift();
-        const p2 = remainingPlayers.shift();
+    orderedGroups.forEach(groupKey => {
+        const group = groups[groupKey];
 
-        p1.opponents ??= [];
-        p2.opponents ??= [];
-        p1.adversaries ??= [];
-        p2.adversaries ??= [];
+        if (carryPlayer) {
+            group.unshift(carryPlayer);
+            carryPlayer = null;
+        }
 
-        if (!p1.opponents.includes(p2.name)) p1.opponents.push(p2.name);
-        if (!p2.opponents.includes(p1.name)) p2.opponents.push(p1.name);
+        while (group.length >= 2) {
+            const p1 = group.shift();
+            let index = group.findIndex(p => !p1.opponents.includes(p.name));
+            if (index === -1) index = 0;
+            const p2 = group.splice(index, 1)[0];
 
-        pairings.push([p1, p2]);
+            p1.opponents.push(p2.name);
+            p2.opponents.push(p1.name);
+
+            pairings.push([p1, p2]);
+        }
+
+        if (group.length === 1) carryPlayer = group.shift();
+    });
+
+    if (carryPlayer) {
+        carryPlayer.victory += 1;
+        pairings.push([carryPlayer, null]);
     }
 
-    /* =======================
-       BYE (plus petit score)
-    ======================= */
-    if (remainingPlayers.length === 1) {
-        remainingPlayers.sort((a, b) => a.score - b.score);
-        const byePlayer = remainingPlayers.shift();
-
-        byePlayer.victory = (byePlayer.victory || 0) + 1;
-
-        pairings.push([byePlayer, null]);
-    }
-
-    /* =======================
-       AFFICHAGE
-    ======================= */
     const container = document.getElementById("pairings");
 
-    pairings.forEach((pair, index) => {
+    pairings.forEach((pair, idx) => {
         const tr = document.createElement("tr");
         tr.className = "match-row";
 
         tr.innerHTML = `
-            <td class="match-number">${index + 1}</td>
+            <td class="match-number">${idx + 1}</td>
             <td class="player-name">${pair[0].name}</td>
         `;
 
@@ -140,9 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(tr);
     });
 
-    /* =======================
-       VALIDATION DU ROUND
-    ======================= */
     const validateBtn = document.getElementById("validate-round");
 
     function updateValidateButton() {
@@ -150,115 +142,63 @@ document.addEventListener("DOMContentLoaded", () => {
             const btns = row.querySelectorAll(".select-btn");
             return btns.length === 0 || row.querySelector(".selected");
         });
-
         validateBtn.disabled = !ok;
         validateBtn.classList.toggle("enabled", ok);
     }
 
     validateBtn.addEventListener("click", () => {
 
-        const matchRows = document.querySelectorAll(".match-row");
-
-        matchRows.forEach(row => {
+        document.querySelectorAll(".match-row").forEach(row => {
             const buttons = row.querySelectorAll(".select-btn");
-
-            // Pas de boutons = bye (déjà géré avant)
             if (buttons.length === 0) return;
 
             const selected = row.querySelector(".selected");
             if (!selected) return;
 
             const label = selected.textContent;
-
             const leftName = row.children[1].textContent;
             const rightName = row.children[3].textContent;
 
-            const leftPlayer = players.find(p => p.name === leftName);
-            const rightPlayer = players.find(p => p.name === rightName);
+            const left = players.find(p => p.name === leftName);
+            const right = players.find(p => p.name === rightName);
+            if (!left || !right) return;
 
-            if (!leftPlayer || !rightPlayer) return;
-
-            leftPlayer.victory ??= 0;
-            leftPlayer.defeat ??= 0;
-            leftPlayer.score ??= 0;
-
-            rightPlayer.victory ??= 0;
-            rightPlayer.defeat ??= 0;
-            rightPlayer.score ??= 0;
-
-            /* =======================
-               CAS DE RÉSULTAT
-            ======================= */
             if (label === "V" && selected === buttons[0]) {
-                leftPlayer.victory += 1;
-                rightPlayer.defeat += 1;
-
+                left.victory += 1;
+                right.defeat += 1;
             } else if (label === "V" && selected === buttons[2]) {
-                rightPlayer.victory += 1;
-                leftPlayer.defeat += 1;
-
+                right.victory += 1;
+                left.defeat += 1;
             } else if (label === "DL") {
-                leftPlayer.defeat += 1;
-                rightPlayer.defeat += 1;
+                left.defeat += 1;
+                right.defeat += 1;
             }
 
-            /* =======================
-               WINRATE
-            ======================= */
-            leftPlayer.winrate = Math.round(
-                (leftPlayer.victory / (leftPlayer.victory + leftPlayer.defeat || 1)) * 100
-            );
-            rightPlayer.winrate = Math.round(
-                (rightPlayer.victory / (rightPlayer.victory + rightPlayer.defeat || 1)) * 100
-            );
+            left.winrate = Math.round((left.victory / (left.victory + left.defeat || 1)) * 100);
+            right.winrate = Math.round((right.victory / (right.victory + right.defeat || 1)) * 100);
         });
 
         players.forEach(player => {
-            // Winrate moyen des opponents
             const opponentsWinrate = player.opponents?.length
-                ? Math.round(player.opponents.map(name => {
-                    const p = players.find(pl => pl.name === name);
-                    return p ? p.winrate : 0;
-                }).reduce((a,b)=>a+b,0) / player.opponents.length)
+                ? Math.round(player.opponents.map(n => players.find(p => p.name === n)?.winrate || 0).reduce((a,b)=>a+b,0) / player.opponents.length)
                 : 0;
 
-            // Construction du tableau adversaries
-            player.adversaries = []; // on vide le tableau
-
-            player.opponents?.forEach(opponentName => {
-                const opponent = players.find(p => p.name === opponentName);
-                if (!opponent) return;
-
-                opponent.opponents?.forEach(advName => {
-                    if (advName !== player.name) {
-                        player.adversaries.push(advName);
-                    }
-                });
+            player.adversaries = [];
+            player.opponents?.forEach(opName => {
+                const opp = players.find(p => p.name === opName);
+                if (!opp) return;
+                opp.opponents?.forEach(adv => { if (adv !== player.name) player.adversaries.push(adv); });
             });
 
-            // Winrate moyen des adversaries
             const adversariesWinrate = player.adversaries?.length
-                ? Math.round(player.adversaries.map(name => {
-                    const p = players.find(pl => pl.name === name);
-                    return p ? p.winrate : 0;
-                }).reduce((a,b)=>a+b,0) / player.adversaries.length)
+                ? Math.round(player.adversaries.map(n => players.find(p => p.name === n)?.winrate || 0).reduce((a,b)=>a+b,0) / player.adversaries.length)
                 : 0;
 
-            // Score final
-            let score = (player.victory || 0) * 3000000;
-            score += opponentsWinrate * 1000;
-            score += adversariesWinrate;
-
-            // Format 9 chiffres
-            player.score = String(score).padStart(9,'0');
+            let score = player.victory * 3000000 + opponentsWinrate * 1000 + adversariesWinrate;
+            player.score = String(score).padStart(9, '0');
         });
 
-        /* =======================
-           ROUND SUIVANT
-        ======================= */
-        let currentRound = parseInt(localStorage.getItem("currentRound")) || 1;
-        localStorage.setItem("currentRound", currentRound + 1);
-
+        localStorage.setItem("currentRound", (parseInt(localStorage.getItem("currentRound")) || 1) + 1);
         localStorage.setItem("tournamentPlayers", JSON.stringify(players));
 
         window.location.href = "score.html";

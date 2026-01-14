@@ -17,14 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    /* ============================
-       GESTION DU NOMBRE DE ROUNDS
-       (AFFICHAGE SIMPLE : X)
-    ============================ */
     let totalRounds = localStorage.getItem("totalRounds");
     let currentRound;
 
-    // Initialisation UNIQUEMENT si absent
     totalRounds = calculateRounds(players.length);
     localStorage.setItem("totalRounds", totalRounds);
 
@@ -32,16 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     currentRound = 1;
     localStorage.setItem("currentRound", currentRound);
 
-
-    // Nombre de rounds restants
     const remainingRounds = totalRounds - currentRound + 1;
 
-    // 👉 AFFICHAGE SIMPLE (ex: "4")
     document.getElementById("round-count").textContent = remainingRounds;
 
-    /* ============================
-       CLASSEMENT (INCHANGÉ)
-    ============================ */
     players.forEach(player => {
         const row = document.createElement("tr");
 

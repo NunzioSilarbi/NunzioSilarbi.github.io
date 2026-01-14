@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    /* ============================
-       AFFICHAGE ROUNDS RESTANTS
-    ============================ */
     const roundCountSpan = document.getElementById("round-count");
 
     let currentRound = parseInt(localStorage.getItem("currentRound")) || 1;
@@ -23,14 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const roundsRemaining = totalRounds - currentRound + 1;
     roundCountSpan.textContent = roundsRemaining > 0 ? roundsRemaining : 0;
 
-    /* ============================
-       LOG DES JOUEURS À L'ARRIVÉE
-    ============================ */
     console.log("Joueurs à l'arrivée sur score.html :", players);
 
-    /* ============================
-       TRI PAR SCORE (CLASSEMENT)
-    ============================ */
     players.forEach(p => {
         p.victory ??= 0;
         p.defeat ??= 0;
@@ -44,9 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return b.winrate - a.winrate;
     });
 
-    /* ============================
-       AFFICHAGE AVEC GESTION ÉGALITÉS
-    ============================ */
     let lastScore = null;
     let placement = 0;
 
@@ -89,9 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreBody.appendChild(row);
     });
 
-    /* ============================
-   BOUTONS
-============================ */
     const quitButton = document.getElementById("quit-button");
     const nextRoundButton = document.getElementById("next-round");
 
@@ -100,32 +85,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (roundsRemaining <= 0) {
-        // Masquer le bouton continuer
         nextRoundButton.style.display = "none";
 
-        // Créer un nouveau bouton "Terminer le tournoi"
         const finishButton = document.createElement("button");
         finishButton.id = "finish-tournament";
         finishButton.textContent = "Terminer le tournoi";
-        finishButton.className = nextRoundButton.className; // même CSS que Continuer
+        finishButton.className = nextRoundButton.className;
 
-        // Ajouter après le bouton Quitter
         nextRoundButton.parentNode.appendChild(finishButton);
 
         finishButton.addEventListener("click", () => {
             window.location.href = "index.html";
         });
     } else {
-        // Bouton continuer normal
         nextRoundButton.addEventListener("click", () => {
-            // Logique identique à tournament.html avant d'aller sur round.html
             if (!players || players.length === 0) {
                 alert("Aucun joueur trouvé !");
                 window.location.href = "index.html";
                 return;
             }
 
-            // Redirection vers round.html
             window.location.href = "round.html";
         });
     }

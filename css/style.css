@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    overflow: hidden; /* empêche le scroll de la page */
+    overflow: hidden;
 }
 
 .container {
@@ -23,7 +23,7 @@ body {
 .card {
     width: 70%;
     max-width: 800px;
-    height: 600px; /* carte fixe */
+    height: 600px;
     padding: 30px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.85);
@@ -39,10 +39,9 @@ body {
     text-align: center;
 }
 
-/* Tableau sans scroll, prend tout l’espace restant */
 .players-scroll {
-    height: calc(100% - 70px); /* 70px = approx titre + marges */
-    overflow-y: auto; /* empêche scroll interne */
+    height: calc(100% - 70px);
+    overflow-y: auto;
     margin-bottom: 15px;
 }
 
@@ -58,7 +57,6 @@ td {
     padding: 6px 0;
 }
 
-/* Numéro joueur */
 .player-number {
     width: 25px;
     text-align: center;

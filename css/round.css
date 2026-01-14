@@ -24,7 +24,7 @@ body {
 .card {
     width: 70%;
     max-width: 800px;
-    height: 600px; /* carte fixe */
+    height: 600px;
     padding: 30px;
     border-radius: 12px;
     background: rgba(255,255,255,0.85);
@@ -40,10 +40,9 @@ body {
     text-align: center;
 }
 
-/* Tableau sans scroll, prend tout l’espace restant */
 .players-scroll {
-    height: calc(100% - 70px); /* ajuste à la carte */
-    overflow-y: auto;           /* empêche scroll interne */
+    height: calc(100% - 70px);
+    overflow-y: auto;
     margin-bottom: 15px;
 }
 
@@ -109,14 +108,13 @@ td {
     cursor: pointer;
 }
 
-/* Bouton transparent pour le timer (version plus grande) */
 .timer-btn {
     width: 100%;
-    padding: 35px 0;           /* plus grand padding */
-    font-size: 108px;           /* texte plus grand */
+    padding: 35px 0;
+    font-size: 108px;
     font-weight: bold;
     text-align: center;
-    border: 3px solid rgba(0,0,0,0.25); /* bordure un peu plus épaisse */
+    border: 3px solid rgba(0,0,0,0.25);
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
